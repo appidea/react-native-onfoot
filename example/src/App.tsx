@@ -5,15 +5,20 @@ import {
   StyleSheet,
   Text,
   View,
-  Button, TextInput
+  Button,
+  TextInput
 } from 'react-native';
 
 const App = () => {
   const [steps, setSteps] = useState('None');
-  const [date, setDate] = useState(/*(new Date()).toISOString()*/ '2022-04-28T20:51:53.066Z');
+  const [date, setDate] = useState((new Date()).toISOString());
   const [active, setActive] = useState(false);
 
   const listener = useRef(null);
+
+  useEffect(() => {
+    askPermissions();
+  }, []);
 
   useEffect(() => {
     if (active) {
@@ -36,7 +41,7 @@ const App = () => {
 
       <View style={styles.row}>
         <Text>Count active:</Text>
-        <Button title={active ? 'ACTIVE':'INACTIVE'} onPress={() => setActive(!active)} />
+        <Button title={active ? 'ACTIVE' : 'INACTIVE'} onPress={() => setActive(!active)} />
       </View>
     </View>
   );
